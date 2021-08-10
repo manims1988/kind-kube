@@ -5,13 +5,13 @@ Vagrant.configure("2") do |config|
 
   config.vm.box = "generic/ubuntu2004"
   config.vm.network :private_network, ip: '172.42.42.115'
-  config.vbguest.auto_update = true
+  config.vbguest.auto_update = false
   config.vm.provider "virtualbox" do |vb|
     vb.memory = 4096
     vb.cpus = 1
   config.vm.provision "shell", inline: <<-SHELL
     apt -qq install fish -y 
-    curl -s -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" > /dev/null 2>&1
+    curl -s -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
     chmod 777 kubectl
     mv /root/kubectl /usr/local/bin/
     curl -fsSL https://get.docker.com/ | sh > /dev/null 2>&1
